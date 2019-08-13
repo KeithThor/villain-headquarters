@@ -24,6 +24,22 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\modules\auth\auth.constants.ts" />
+    <None Remove="ClientApp\src\app\modules\auth\models\login-result.model.ts" />
+    <None Remove="ClientApp\src\app\modules\auth\models\user.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\auth\auth.constants.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\auth\models\login-result.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\auth\models\user.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\modules\auth\services\" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
