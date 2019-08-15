@@ -23,8 +23,10 @@ export class LoginComponent implements OnInit {
   private redirectUrl: string;
 
   ngOnInit() {
-    let redirect = this.route.snapshot.queryParamMap.get("redirect");
-    if (redirect != null) this.redirectUrl = redirect;
+    // let redirect = this.route.snapshot.queryParamMap.get("redirect");
+    let redirect = this.route.params.subscribe(params => {
+      this.redirectUrl = params['redirect'];
+    })
   }
 
   /**Called when the user presses the login button. Will attempt to login in using the data stored in the form. */
@@ -42,12 +44,7 @@ export class LoginComponent implements OnInit {
     }
     else {
       if (err.status === 400) {
-        if (err.statusText === "Wrong password") {
-          this.errorMessage = "Password incorrect for the given username.";
-        }
-        else {
-          this.errorMessage = "No users were found for the given username and password combination.";
-        }
+        this.errorMessage = "No users were found for the given username and password combination.";
       }
     }
   }

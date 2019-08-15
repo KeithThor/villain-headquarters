@@ -3,7 +3,7 @@
     <h4>Login</h4>
 
     <form class="form-group">
-      <div *ngIf="errorMessage != null"
+      <div *ngIf="errorMessage"
            class="alert alert-danger">
         {{errorMessage}}
       </div>
@@ -11,13 +11,13 @@
       <div class="form-group">
         <label for="username">Villain Name: </label>
         <input type="text" name="username" class="form-control" [(ngModel)]="user.username" required
-               #username="ngModel" />
+               #username="ngModel"/>
       </div>
 
       <div class="form-group">
         <label for="password">Password: </label>
         <input type="password" name="password" class="form-control" [(ngModel)]="user.password" required
-               #password="ngModel" />
+               #password="ngModel"/>
       </div>
 
       <button type="submit" class="btn btn-primary" (click)="onLogin()"
