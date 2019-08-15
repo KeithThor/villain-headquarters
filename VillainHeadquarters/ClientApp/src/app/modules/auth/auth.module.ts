@@ -5,6 +5,9 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountService } from './services/account.service';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LocalStorageConstants } from './auth.constants';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -17,10 +20,22 @@ const routes: Routes = [
   }
 ];
 
+export function tokenGetter() {
+  return localStorage.getItem(LocalStorageConstants.token);
+}
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost"],
+        blacklistedRoutes: []
+      }
+    }),
     RouterModule.forChild(routes)
   ],
   declarations: [

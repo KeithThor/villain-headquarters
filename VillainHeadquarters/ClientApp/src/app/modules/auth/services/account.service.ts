@@ -10,15 +10,15 @@ import { LoginResult } from '../models/login-result.model';
 @Injectable()
 export class AccountService {
   constructor(private http: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private jwtHelper: JwtHelperService) {
 
   }
-  private jwtHelper = new JwtHelperService();
 
   /**Returns true if the client is currently authenticated. If the client is not authenticated, will redirect the
    * client to the login page.*/
-  isAuthenticated(): boolean {
-    if (localStorage.getItem(LocalStorageConstants.username) != null) {
+  public isAuthenticated(): boolean {
+    if (localStorage.getItem(LocalStorageConstants.token)) {
       return !this.jwtHelper.isTokenExpired(
         localStorage.getItem(LocalStorageConstants.token));
     }
@@ -33,8 +33,7 @@ export class AccountService {
    * @param errorHandler The function to call to handle the error in case there are any.
    */
   public login(user: User, redirectUrl: string, errorHandler?: (err: HttpErrorResponse) => void): void {
-    let routerB = this.router;
-
+    let router = this.router;
     this.http.post<LoginResult>("/api/account/login", user).subscribe({
       next(result) {
         localStorage.setItem(LocalStorageConstants.token, result.token);
@@ -45,7 +44,7 @@ export class AccountService {
         if (errorHandler != null) errorHandler(err);
         else console.log(err);
       },
-      complete() { routerB.navigate([redirectUrl]); }
+      complete() { router.navigate([redirectUrl]); }
     });
   }
 
