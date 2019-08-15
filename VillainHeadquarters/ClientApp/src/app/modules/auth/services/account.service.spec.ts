@@ -104,4 +104,90 @@ describe('AccountService', () => {
 
     expect(navigateSpy).toHaveBeenCalledWith(["redirect"]);
   }));
+
+  it("should set localStorage data if register was successful.", inject([AccountService], (service: AccountService) => {
+    let httpClient = TestBed.get(HttpClient);
+    let loginResult = new LoginResult();
+    loginResult.id = "1234";
+    loginResult.token = "sampleToken";
+    loginResult.username = "username";
+
+    httpClient.post = () => of(loginResult);
+    service.register({username: "username", password: "password"}, "redirect");
+
+    expect(localStorage.getItem(LocalStorageConstants.username)).toBe(loginResult.username);
+    expect(localStorage.getItem(LocalStorageConstants.id)).toBe(loginResult.id);
+    expect(localStorage.getItem(LocalStorageConstants.token)).toBe(loginResult.token);
+  }));
+
+  it("should call errorHandler if register returned an error.", inject([AccountService], (service: AccountService) => {
+    let httpClient = TestBed.get(HttpClient);
+    let errorHandler = (err: HttpErrorResponse) => {};
+    let errorHandlerSpy = jasmine.createSpy('errorHandlerSpy', errorHandler);
+
+    httpClient.post = () => { return throwError(new HttpErrorResponse({})) };
+    service.register({username: "username", password: "password"}, "redirect", errorHandlerSpy);
+
+    expect(errorHandlerSpy).toHaveBeenCalled();
+  }));
+
+  it("should call navigate after a successful register.", inject([AccountService], (service: AccountService) => {
+    let httpClient = TestBed.get(HttpClient);
+    let router = TestBed.get(Router);
+    let navigateSpy = spyOn(router, "navigate");
+    let loginResult = new LoginResult();
+    loginResult.id = "1234";
+    loginResult.token = "sampleToken";
+    loginResult.username = "username";
+
+    httpClient.post = () => of(loginResult);
+    service.register({username: "username", password: "password"}, "redirect");
+
+    expect(navigateSpy).toHaveBeenCalled();
+  }));
+
+  it("should call navigate with correct url after a successful register.", inject([AccountService], (service: AccountService) => {
+    let httpClient = TestBed.get(HttpClient);
+    let router = TestBed.get(Router);
+    let navigateSpy = spyOn(router, "navigate");
+    let loginResult = new LoginResult();
+    loginResult.id = "1234";
+    loginResult.token = "sampleToken";
+    loginResult.username = "username";
+
+    httpClient.post = () => of(loginResult);
+    service.register({username: "username", password: "password"}, "redirect");
+
+    expect(navigateSpy).toHaveBeenCalledWith(["redirect"]);
+  }));
+
+  it("should clear localStorage when logout is called.", inject([AccountService], (service: AccountService) => {
+    localStorage.setItem(LocalStorageConstants.token, "token");
+    localStorage.setItem(LocalStorageConstants.id, "id");
+    localStorage.setItem(LocalStorageConstants.username, "username");
+
+    service.logout();
+
+    expect(localStorage.getItem(LocalStorageConstants.token)).toBeFalsy();
+    expect(localStorage.getItem(LocalStorageConstants.id)).toBeFalsy();
+    expect(localStorage.getItem(LocalStorageConstants.username)).toBeFalsy();
+  }));
+
+  it("should call navigate after a successful logout.", inject([AccountService], (service: AccountService) => {
+    let router = TestBed.get(Router);
+    let navigateSpy = spyOn(router, "navigate");
+
+    service.logout();
+
+    expect(navigateSpy).toHaveBeenCalled();
+  }));
+
+  it("should navigate to home after a successful logout.", inject([AccountService], (service: AccountService) => {
+    let router = TestBed.get(Router);
+    let navigateSpy = spyOn(router, "navigate");
+
+    service.logout();
+
+    expect(navigateSpy).toHaveBeenCalledWith(["/"]);
+  }));
 });

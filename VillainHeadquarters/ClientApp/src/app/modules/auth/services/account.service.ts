@@ -55,24 +55,24 @@ export class AccountService {
    * @param errorHandler The function to call to handle the error in case there are any.
    */
   public register(user: User, redirectUrl: string, errorHandler?: (err: HttpErrorResponse) => void): void {
-    let routerB = this.router;
+    let router = this.router;
 
     this.http.post<LoginResult>("/api/account/register", user).subscribe({
       next(result) {
-        sessionStorage.setItem(LocalStorageConstants.token, result.token);
-        sessionStorage.setItem(LocalStorageConstants.username, result.username);
-        sessionStorage.setItem(LocalStorageConstants.id, result.id);
+        localStorage.setItem(LocalStorageConstants.token, result.token);
+        localStorage.setItem(LocalStorageConstants.username, result.username);
+        localStorage.setItem(LocalStorageConstants.id, result.id);
       },
       error(err: HttpErrorResponse) {
         if (errorHandler != null) errorHandler(err);
         else console.log(err);
       },
-      complete() { routerB.navigate([redirectUrl]); }
+      complete() { router.navigate([redirectUrl]); }
     });
   }
 
   /**Clears the user's JWT from local storage and redirects them to the home page. */
-  logout(): void {
+  public logout(): void {
     localStorage.clear();
     this.router.navigate(['/']);
   }
