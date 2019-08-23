@@ -10,6 +10,7 @@ import { LocalStorageConstants } from './auth.constants';
 import { HttpClientModule } from '@angular/common/http';
 import { MinLowerCaseDirective } from './directives/min-lower-case/min-lower-case.directive';
 import { MinUpperCaseDirective } from './directives/min-upper-case/min-upper-case.directive';
+import { MinSpecialChrDirective } from './directives/min-special-chr/min-special-chr.directive';
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     MinLowerCaseDirective,
-    MinUpperCaseDirective
+    MinUpperCaseDirective,
+    MinSpecialChrDirective
   ],
   providers: [
     AccountService
