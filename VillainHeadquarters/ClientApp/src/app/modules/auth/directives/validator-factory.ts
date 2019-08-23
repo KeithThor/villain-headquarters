@@ -5,7 +5,11 @@ import { ValidatorFn, AbstractControl } from "@angular/forms";
  */
 export function createValidator(matcher: RegExp, nameOfObj: string): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
+        let valueObj = { value: control.value };
+        let container = {};
+        container[nameOfObj] = valueObj;
+
         const foundMatch = matcher.test(control.value);
-        return foundMatch ? null : {nameOfObj: {value: control.value}};
+        return foundMatch ? null : container;
     };
 }

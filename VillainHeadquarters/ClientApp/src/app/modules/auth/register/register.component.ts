@@ -23,6 +23,11 @@ export class RegisterComponent implements OnInit {
     this.account.register(this.user, '', this.onError.bind(this));
   }
 
+  public logErrors(obj: any): string {
+    console.log(obj);
+    return "";
+  }
+
   /**
    * Handler called if and when there is an error with the request to register a new user.
    * @param err

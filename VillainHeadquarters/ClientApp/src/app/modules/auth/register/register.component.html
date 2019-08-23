@@ -34,7 +34,7 @@
           [class.has-error]="password.invalid && (password.dirty || password.touched)">
         <label class="control-label" for="password">Password: </label>
         <input type="password" name="password" class="form-control" [(ngModel)]="user.password" required
-               minlength="6" maxlength="15" pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).*"
+               minlength="6" maxlength="15" appMinUpperCase="1" appMinLowerCase="1" appMinSpecialChr="1"
                #password="ngModel" />
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)"
@@ -48,9 +48,15 @@
           <div *ngIf="password.errors.maxlength">
             Password must be less than 15 characters long.
           </div>
-          <!-- <div *ngIf="password.errors.pattern">
-            Password must have at least 1 lowercase, 1 uppercase, 1 number, and 1 special character.
-          </div> -->
+          <div *ngIf="password.errors.minSpecialChr">
+            Password must have at least 1 special character.
+          </div>
+          <div *ngIf="password.errors.minLowerCase">
+            Password must have at least 1 lower case letter.
+          </div>
+          <div *ngIf="password.errors.minUpperCase">
+            Password must have at least 1 upper case letter.
+          </div>
         </div>
       </div>
 
