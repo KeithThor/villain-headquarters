@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LocalStorageConstants } from './auth.constants';
 import { HttpClientModule } from '@angular/common/http';
 import { MinLowerCaseDirective } from './directives/min-lower-case/min-lower-case.directive';
+import { MinUpperCaseDirective } from './directives/min-upper-case/min-upper-case.directive';
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ export function tokenGetter() {
   declarations: [
     LoginComponent,
     RegisterComponent,
-    MinLowerCaseDirective
+    MinLowerCaseDirective,
+    MinUpperCaseDirective
   ],
   providers: [
     AccountService
