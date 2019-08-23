@@ -35,6 +35,7 @@
         <label class="control-label" for="password">Password: </label>
         <input type="password" name="password" class="form-control" [(ngModel)]="user.password" required
                minlength="6" maxlength="15" appMinUpperCase="1" appMinLowerCase="1" appMinSpecialChr="1"
+               appMinNumber="1"
                #password="ngModel" />
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)"
@@ -56,6 +57,9 @@
           </div>
           <div *ngIf="password.errors.minUpperCase">
             Password must have at least 1 upper case letter.
+          </div>
+          <div *ngIf="password.errors.minNumber">
+            Password must have at least 1 number.
           </div>
         </div>
       </div>

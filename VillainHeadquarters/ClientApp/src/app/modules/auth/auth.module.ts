@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MinLowerCaseDirective } from './directives/min-lower-case/min-lower-case.directive';
 import { MinUpperCaseDirective } from './directives/min-upper-case/min-upper-case.directive';
 import { MinSpecialChrDirective } from './directives/min-special-chr/min-special-chr.directive';
+import { MinNumberDirective } from './directives/min-number/min-number.directive';
 
 const routes: Routes = [
   {
@@ -46,7 +47,8 @@ export function tokenGetter() {
     RegisterComponent,
     MinLowerCaseDirective,
     MinUpperCaseDirective,
-    MinSpecialChrDirective
+    MinSpecialChrDirective,
+    MinNumberDirective
   ],
   providers: [
     AccountService
