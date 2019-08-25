@@ -15,8 +15,7 @@ export class AccountService {
 
   }
 
-  /**Returns true if the client is currently authenticated. If the client is not authenticated, will redirect the
-   * client to the login page.*/
+  /**Returns true if the client is currently authenticated.*/
   public isAuthenticated(): boolean {
     if (localStorage.getItem(LocalStorageConstants.token)) {
       return !this.jwtHelper.isTokenExpired(

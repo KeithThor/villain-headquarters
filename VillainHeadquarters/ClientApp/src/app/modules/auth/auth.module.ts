@@ -12,6 +12,7 @@ import { MinLowerCaseDirective } from './directives/min-lower-case/min-lower-cas
 import { MinUpperCaseDirective } from './directives/min-upper-case/min-upper-case.directive';
 import { MinSpecialChrDirective } from './directives/min-special-chr/min-special-chr.directive';
 import { MinNumberDirective } from './directives/min-number/min-number.directive';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -51,7 +52,8 @@ export function tokenGetter() {
     MinNumberDirective
   ],
   providers: [
-    AccountService
+    AccountService,
+    AuthGuard
   ]
 })
 export class AuthModule { }
