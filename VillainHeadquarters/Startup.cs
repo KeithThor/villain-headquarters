@@ -27,6 +27,8 @@ namespace VillainHeadquarters
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddVillainsAuth();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +45,8 @@ namespace VillainHeadquarters
                 app.UseHsts();
             }
 
+            app.UseVillainsCors();
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
