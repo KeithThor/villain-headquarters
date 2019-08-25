@@ -23,7 +23,7 @@ const routes: Routes = [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    AuthModule,
+    AuthModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   providers: [],

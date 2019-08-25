@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -54,6 +54,22 @@ export function tokenGetter() {
   providers: [
     AccountService,
     AuthGuard
+  ],
+  exports: [
+    MinLowerCaseDirective,
+    MinUpperCaseDirective,
+    MinSpecialChrDirective,
+    MinNumberDirective
   ]
 })
-export class AuthModule { }
+export class AuthModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        AccountService,
+        AuthGuard
+      ]
+    };
+  }
+}
