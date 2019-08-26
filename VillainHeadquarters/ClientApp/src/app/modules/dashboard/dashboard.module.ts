@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RouterModule } from '@angular/router';
 
-const routes = [
-  { path: "", component: DashboardComponent }
-]
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    DashboardRoutingModule
   ],
-  declarations: [
-    DashboardComponent
-  ]
+  declarations: [DashboardComponent]
 })
 export class DashboardModule { }

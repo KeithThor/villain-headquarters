@@ -33,7 +33,7 @@ export class AccountService {
    */
   public login(user: User, redirectUrl: string, errorHandler?: (err: HttpErrorResponse) => void): void {
     let router = this.router;
-    this.http.post<LoginResult>("/api/account/login", user).subscribe({
+    this.http.post<LoginResult>("/api/user/login", user).subscribe({
       next(result) {
         localStorage.setItem(LocalStorageConstants.token, result.token);
         localStorage.setItem(LocalStorageConstants.username, result.username);
@@ -56,7 +56,7 @@ export class AccountService {
   public register(user: User, redirectUrl: string, errorHandler?: (err: HttpErrorResponse) => void): void {
     let router = this.router;
 
-    this.http.post<LoginResult>("/api/account/register", user).subscribe({
+    this.http.post<LoginResult>("/api/user/register", user).subscribe({
       next(result) {
         localStorage.setItem(LocalStorageConstants.token, result.token);
         localStorage.setItem(LocalStorageConstants.username, result.username);
