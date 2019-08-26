@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Development" />
     <None Remove="ClientApp\src\app\modules\auth\auth.constants.ts" />
     <None Remove="ClientApp\src\app\modules\auth\models\login-result.model.ts" />
     <None Remove="ClientApp\src\app\modules\auth\models\user.model.ts" />

@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VillainHeadquarters.Data;
 
 namespace VillainHeadquarters
 {
@@ -29,6 +31,14 @@ namespace VillainHeadquarters
             });
 
             services.AddVillainsAuth();
+
+            // Add and scaffold users database
+            services.AddDbContext<UserDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("UserDb"));
+            });
+            services.AddIdentityCore<ApplicationUser>()
+                    .AddEntityFrameworkStores<UserDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
