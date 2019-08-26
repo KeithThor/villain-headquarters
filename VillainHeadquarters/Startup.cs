@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +29,8 @@ namespace VillainHeadquarters
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddVillainsAuth();
+            services.AddVillainsAuthentication();
+            services.AddVillainsAuthorization();
 
             // Add and scaffold users database
             services.AddDbContext<UserDbContext>(options =>

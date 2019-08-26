@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using VillainHeadquarters.Auth;
 using VillainHeadquarters.Data;
 using VillainHeadquarters.Models;
 
 namespace VillainHeadquarters.Services
 {
+    /// <summary>
+    /// Service responsible for registering new user accounts.
+    /// </summary>
     public class RegistrationService
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -23,12 +27,16 @@ namespace VillainHeadquarters.Services
         /// </summary>
         /// <param name="user">The credentials of the new user to register.</param>
         /// <returns>Returns an ApplicationUser if registration was successful, else returns null.</returns>
-        public async Task<ApplicationUser> RegisterUserAsync(UserCredentials user)
+        public async Task<ApplicationUser> RegisterUserAsync(UserCredentials user, bool isAdmin = false)
         {
             if (await _userManager.FindByNameAsync(user.Username) != null) return null;
 
             var id = Guid.NewGuid().ToString();
-            var idClaims = GetUserClaims(user, id );
+
+            List<IdentityUserClaim<string>> idClaims;
+            if (isAdmin) idClaims = GetAdminClaims(user, id);
+            else idClaims = GetUserClaims(user, id);
+
             var claims = idClaims.Select(idClaim => idClaim.ToClaim()).ToList();
 
             var newUser = new ApplicationUser
@@ -69,9 +77,27 @@ namespace VillainHeadquarters.Services
                 new IdentityUserClaim<string>
                 {
                     ClaimType = ClaimTypes.Role,
-                    ClaimValue = "villains.keiththor.com/user"
+                    ClaimValue = VillainsClaimsValues.User
                 }
             };
+        }
+
+        /// <summary>
+        /// Constructs and returns a new List of IdentityUserClaims for the given admin user.
+        /// </summary>
+        /// <param name="user">The object that holds the user's credentials.</param>
+        /// <param name="userId">The id of the new user.</param>
+        /// <returns></returns>
+        private List<IdentityUserClaim<string>> GetAdminClaims(UserCredentials user, string userId)
+        {
+            var claims = GetUserClaims(user, userId);
+            claims.Add(new IdentityUserClaim<string>
+            {
+                ClaimType = ClaimTypes.Role,
+                ClaimValue = VillainsClaimsValues.Admin
+            });
+
+            return claims;
         }
     }
 }

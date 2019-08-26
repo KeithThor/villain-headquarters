@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
+using VillainHeadquarters.Auth;
 using VillainHeadquarters.Models;
 using VillainHeadquarters.Services;
 
@@ -30,7 +32,7 @@ namespace VillainHeadquarters
         /// Adds JWT authentication for use in Villains microservices.
         /// </summary>
         /// <param name="services"></param>
-        public static void AddVillainsAuth(this IServiceCollection services)
+        public static void AddVillainsAuthentication(this IServiceCollection services)
         {
             var token = GetToken(services);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,6 +50,22 @@ namespace VillainHeadquarters
                             ValidateAudience = true
                         };
                     });
+        }
+
+        /// <summary>
+        /// Adds Authorization and related authorization policies to the server based on the requirements for
+        /// Villains.
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddVillainsAuthorization(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(AuthorizationPolicies.AdminOnly, policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, VillainsClaimsValues.Admin);
+                });
+            });
         }
 
         /// <summary>
