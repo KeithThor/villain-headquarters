@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using System.Threading.Tasks;
 using VillainHeadquarters.Models;
+using VillainHeadquarters.Services;
 
 namespace VillainHeadquarters
 {
@@ -50,6 +48,18 @@ namespace VillainHeadquarters
                             ValidateAudience = true
                         };
                     });
+        }
+
+        /// <summary>
+        /// Adds all dependency injection requirements for the Villains server.
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddInjections(this IServiceCollection services)
+        {
+            services.AddSingleton<JwtSecurityTokenHandler>();
+            services.AddSingleton<TokenBuilder>();
+            services.AddTransient<RegistrationService>();
+            services.AddTransient<UserFinder>();
         }
 
         /// <summary>

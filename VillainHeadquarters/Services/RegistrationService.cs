@@ -28,18 +28,22 @@ namespace VillainHeadquarters.Services
             if (await _userManager.FindByNameAsync(user.Username) != null) return null;
 
             var id = Guid.NewGuid().ToString();
-            var claims = GetUserClaims(user, id );
+            var idClaims = GetUserClaims(user, id );
+            var claims = idClaims.Select(idClaim => idClaim.ToClaim()).ToList();
 
             var newUser = new ApplicationUser
             {
                 Id = id,
                 UserName = user.Username,
-                Claims = claims
+                Claims = idClaims
             };
 
             var result = await _userManager.CreateAsync(newUser, user.Password);
-            if (result.Succeeded) return newUser;
-            else return null;
+            if (!result.Succeeded) return null;
+
+            result = await _userManager.AddClaimsAsync(newUser, claims);
+            if (!result.Succeeded) return null;
+            else return newUser;
         }
 
         /// <summary>
