@@ -9,15 +9,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './modules/auth/guards/auth/auth.guard';
-
-const routes: Routes = [
-  {
-    path: 'dashboard',
-    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
-    canLoad: [AuthGuard]
-  },
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-]
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +22,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     AuthModule.forRoot(),
-    RouterModule.forRoot(routes)
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
