@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Threading.Tasks;
 using VillainHeadquarters.Data;
-using VillainHeadquarters.Models;
+using VillainShared.Models;
 
 namespace VillainHeadquarters.Services
 {

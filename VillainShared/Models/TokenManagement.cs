@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace VillainHeadquarters.Models
+namespace VillainShared.Models
 {
     [JsonObject("tokenManagement")]
     public class TokenManagement

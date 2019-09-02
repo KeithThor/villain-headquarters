@@ -1,4 +1,4 @@
-﻿namespace VillainHeadquarters.Auth
+﻿namespace VillainShared.Auth
 {
     /// <summary>
     /// A static class containing claims values for Villains servers.
@@ -14,5 +14,10 @@
         /// Returns a string indicating that this claims value is 'admin'.
         /// </summary>
         public static readonly string Admin = "villains.keiththor.com/admin";
+
+        /// <summary>
+        /// Returns a string indicating that this claims value is 'banker'.
+        /// </summary>
+        public static readonly string Banker = "villains.keiththor.com/banker";
     }
 }

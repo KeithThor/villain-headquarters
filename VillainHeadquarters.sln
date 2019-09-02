@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VillainMarketplace.Test", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VillainHeadquarters", "VillainHeadquarters\VillainHeadquarters.csproj", "{C9E93E9E-AC9A-48A5-8CE3-B1A4656C84AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VillainShared", "VillainShared\VillainShared.csproj", "{62B6A295-9C56-46A2-861D-048A124FC4BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{C9E93E9E-AC9A-48A5-8CE3-B1A4656C84AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9E93E9E-AC9A-48A5-8CE3-B1A4656C84AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9E93E9E-AC9A-48A5-8CE3-B1A4656C84AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B6A295-9C56-46A2-861D-048A124FC4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B6A295-9C56-46A2-861D-048A124FC4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B6A295-9C56-46A2-861D-048A124FC4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B6A295-9C56-46A2-861D-048A124FC4BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

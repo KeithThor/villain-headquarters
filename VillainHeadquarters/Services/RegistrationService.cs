@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using VillainHeadquarters.Auth;
 using VillainHeadquarters.Data;
 using VillainHeadquarters.Models;
+using VillainShared.Auth;
 
 namespace VillainHeadquarters.Services
 {
