@@ -36,5 +36,15 @@ namespace VillainBanker.Data
         /// Message containing transaction details.
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Contains the Id of the Vendor that conducted the transaction.
+        /// </summary>
+        public string VendorId { get; set; }
+
+        /// <summary>
+        /// Contains the name of the Vendor that conducted the transaction.
+        /// </summary>
+        public string VendorName { get; set; }
     }
 }

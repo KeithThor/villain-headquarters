@@ -9,11 +9,11 @@
         /// <summary>
         /// Returns a string indicating that this is an AdminOnly authorization policy.
         /// </summary>
-        public static readonly string AdminOnly = "AdminOnly";
+        public const string AdminOnly = "AdminOnly";
 
         /// <summary>
         /// Returns a string indicating that this is an BankerOnly authorization policy.
         /// </summary>
-        public static readonly string BankerOnly = "BankerOnly";
+        public const string BankerOnly = "BankerOnly";
     }
 }

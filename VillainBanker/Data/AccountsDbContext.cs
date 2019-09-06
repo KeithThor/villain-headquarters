@@ -23,7 +23,19 @@ namespace VillainBanker.Data
                         .ValueGeneratedOnAdd();
         }
 
+        /// <summary>
+        /// Contains the database table for user accounts.
+        /// </summary>
         public DbSet<Account> Accounts { get; set; }
+
+        /// <summary>
+        /// Contains the database table for user account transactions.
+        /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
+
+        /// <summary>
+        /// Contains the database table for vendor data.
+        /// </summary>
+        public DbSet<Vendor> Vendors { get; set; }
     }
 }

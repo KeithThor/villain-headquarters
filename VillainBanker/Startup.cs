@@ -26,6 +26,7 @@ namespace VillainBanker
             services.AddVillainsAuthorization();
 
             services.Configure<AccountCreationOptions>(Configuration.GetSection("AccountCreationOptions"));
+            services.Configure<VendorRegistrationOptions>(Configuration.GetSection("VendorRegistrationOptions"));
 
             services.AddDbContext<AccountsDbContext>(options =>
             {

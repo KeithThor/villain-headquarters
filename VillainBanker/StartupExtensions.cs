@@ -28,6 +28,8 @@ namespace VillainBanker
             services.AddTransient<IAccountCreator, AccountCreator>();
             services.AddTransient<ITransactionHandler, TransactionHandler>();
             services.AddTransient<ITransactionLogger, TransactionLogger>();
+            services.AddTransient<IVendorHasher, VendorHasher>();
+            services.AddTransient<IVendorRegistrar, VendorRegistrar>();
         }
     }
 }
