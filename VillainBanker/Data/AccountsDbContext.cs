@@ -17,6 +17,10 @@ namespace VillainBanker.Data
             modelBuilder.Entity<Account>()
                         .HasMany<Transaction>()
                         .WithOne();
+
+            modelBuilder.Entity<Transaction>()
+                        .Property(trans => trans.Id)
+                        .ValueGeneratedOnAdd();
         }
 
         public DbSet<Account> Accounts { get; set; }

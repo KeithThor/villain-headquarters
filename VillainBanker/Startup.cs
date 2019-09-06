@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VillainBanker.Data;
+using VillainBanker.Models;
 using VillainShared;
 
 namespace VillainBanker
@@ -23,6 +24,8 @@ namespace VillainBanker
         {
             services.AddVillainsAuthentication();
             services.AddVillainsAuthorization();
+
+            services.Configure<AccountCreationOptions>(Configuration.GetSection("AccountCreationOptions"));
 
             services.AddDbContext<AccountsDbContext>(options =>
             {

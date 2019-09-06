@@ -18,6 +18,16 @@ namespace VillainBanker.Data
         public decimal Change { get; set; }
 
         /// <summary>
+        /// The amount of currency this account held before this transaction.
+        /// </summary>
+        public decimal Previous { get; set; }
+
+        /// <summary>
+        /// The amount of currency the account holds after the end of this transaction.
+        /// </summary>
+        public decimal Current { get; set; }
+
+        /// <summary>
         /// The time at which the transaction was completed.
         /// </summary>
         public DateTime Date { get; set; }
