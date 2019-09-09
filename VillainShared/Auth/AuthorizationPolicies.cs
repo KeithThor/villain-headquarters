@@ -12,8 +12,8 @@
         public const string AdminOnly = "AdminOnly";
 
         /// <summary>
-        /// Returns a string indicating that this is an BankerOnly authorization policy.
+        /// Returns a string indicating that this is an vendor only authorization policy.
         /// </summary>
-        public const string BankerOnly = "BankerOnly";
+        public const string VendorOnly = "VendorOnly";
     }
 }

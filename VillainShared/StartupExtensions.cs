@@ -63,9 +63,9 @@ namespace VillainShared
                     policy.RequireClaim(ClaimTypes.Role, VillainsClaimsValues.Admin);
                 });
 
-                options.AddPolicy(AuthorizationPolicies.BankerOnly, policy =>
+                options.AddPolicy(AuthorizationPolicies.VendorOnly, policy =>
                 {
-                    policy.RequireClaim(ClaimTypes.Role, VillainsClaimsValues.Banker);
+                    policy.RequireClaim(ClaimTypes.Role, VillainsClaimsValues.Vendor);
                 });
             });
         }

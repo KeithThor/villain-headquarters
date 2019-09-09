@@ -16,8 +16,8 @@
         public static readonly string Admin = "villains.keiththor.com/admin";
 
         /// <summary>
-        /// Returns a string indicating that this claims value is 'banker'.
+        /// Returns a string indicating that this claims value is 'vendor'.
         /// </summary>
-        public static readonly string Banker = "villains.keiththor.com/banker";
+        public static readonly string Vendor = "villains.keiththor.com/vendor";
     }
 }
