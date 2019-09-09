@@ -8,7 +8,7 @@ namespace VillainBanker.Data
     public class Account
     {
         /// <summary>
-        /// The string Id of the user associated with this account.
+        /// The id of this account.
         /// </summary>
         public string Id { get; set; }
 
@@ -21,5 +21,7 @@ namespace VillainBanker.Data
         /// A list of all the transactions made on this account.
         /// </summary>
         public List<Transaction> Transactions { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

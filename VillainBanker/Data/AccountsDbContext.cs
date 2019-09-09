@@ -14,6 +14,10 @@ namespace VillainBanker.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                        .HasMany<Account>()
+                        .WithOne();
+
             modelBuilder.Entity<Account>()
                         .HasMany<Transaction>()
                         .WithOne();
@@ -22,6 +26,11 @@ namespace VillainBanker.Data
                         .Property(trans => trans.Id)
                         .ValueGeneratedOnAdd();
         }
+
+        /// <summary>
+        /// Contains the database table for all users.
+        /// </summary>
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Contains the database table for user accounts.

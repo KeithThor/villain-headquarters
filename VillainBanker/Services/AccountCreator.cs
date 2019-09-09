@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,8 +31,15 @@ namespace VillainBanker.Services
         /// <returns>Returns a task that resolves to true if the account was successfully created.</returns>
         public async Task<bool> CreateAsync(string userId)
         {
-            var existing = await _dbContext.FindAsync<Account>(userId);
-            if (existing != null) return false;
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                user = new User
+                {
+                    Accounts = new List<Account>(),
+                    Id = userId
+                };
+            }
 
             var options = _config.Get<AccountCreationOptions>();
 
@@ -45,14 +53,14 @@ namespace VillainBanker.Services
                 }
             };
 
-            var account = new Account
+            user.Accounts.Add(new Account
             {
                 Id = userId,
                 Balance = options.InitialBalance,
                 Transactions = transactions
-            };
+            });
 
-            await _dbContext.AddAsync(account);
+            await _dbContext.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             return true;
         }
